@@ -17,3 +17,14 @@
     ::fmt/comma
     ::fmt/pipe))
 
+(comment
+  (defn partition-data [data]
+    (->>
+     (cycle [::fmt/space ::fmt/comma ::fmt/pipe])
+     (map #(-> (assoc %1 :group-by %2)) data)
+     (group-by :group-by)))
+
+  (doseq [[delimiter records] (partition-data data)]
+    (let [output (fmt/write-str records delimiter)
+          file-name (str "resources/example." (name delimiter))]
+      (spit file-name output))))
