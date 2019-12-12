@@ -61,4 +61,8 @@
           file-name (str "resources/example." (name delimiter))]
       (spit file-name output))))
 
-(defn -main [] (run-tests 'record-keeper.test))
+(defn -main []
+  (let [results (run-tests 'record-keeper.test)]
+    (when-not (zero? (+ (:fail results) (:error results)))
+      (System/exit 1))))
+
