@@ -1,6 +1,7 @@
 # record-keeper
 
 [![Build Status](https://travis-ci.org/djblue/record-keeper.svg?branch=master)](https://travis-ci.org/djblue/record-keeper)
+[![Coverage Status](https://coveralls.io/repos/github/djblue/record-keeper/badge.svg?branch=master)](https://coveralls.io/github/djblue/record-keeper?branch=master)
 
 ## Assumptions
 
@@ -43,7 +44,7 @@ For example, at the root of this project, do:
 
     curl --data-binary @resources/example.comma -X POST http://localhost:3000/records
 
-## test
+## Tests
 
 To run project tests, do:
 
