@@ -49,6 +49,22 @@
     rk/records-by-last-name [1 2 0]
     rk/records-by-birth-date [2 0 1]))
 
+(deftest bad-record-format
+  (are [input]
+       (thrown-with-msg? Exception #"Unknown record format"
+                         (fmt/read-str input))
+    "grep"
+    "")
+
+  (are [input]
+       (thrown-with-msg? Exception #"Malformed record"
+                         (doall (fmt/read-str input)))
+    "a | b"
+    "a | b | c | d"
+    "a, b"
+    "a, b, c, d"
+    "a b c d"))
+
 (comment
   (defn partition-data [data]
     (->>

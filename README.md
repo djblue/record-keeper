@@ -6,6 +6,7 @@
 
 - No records are duplicated.
 - No record fields need to be escaped.
+- Assume birthdays are always formatted MM/DD/YYYY
 
 ## CLI
 
