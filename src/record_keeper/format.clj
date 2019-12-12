@@ -2,6 +2,12 @@
   "Functions for dealing with record data formats."
   (:require [clojure.string :as s]))
 
+(defn detect-delimiter [record]
+  (cond
+    (s/includes? record ", ")   ::comma
+    (s/includes? record " | ")  ::pipe
+    (s/includes? record " ")    ::space))
+
 (def ^:private record-keys
   [:last-name :first-name :gender :favorite-color :date-of-birth])
 
@@ -21,8 +27,9 @@
   "Read record string of the following format:
   LastName | FirstName | Gender | FavoriteColor | DateOfBirth
   NOTE: empty columns will not be included in parsed values."
-  [string delimiter]
-  (map #(read-delimited % delimiter) (s/split string #"\n")))
+  ([string] (read-str string (detect-delimiter string)))
+  ([string delimiter]
+   (map #(read-delimited % delimiter) (s/split string #"\n"))))
 
 ;; Record Writer
 

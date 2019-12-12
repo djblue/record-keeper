@@ -17,6 +17,16 @@
     ::fmt/comma
     ::fmt/pipe))
 
+(deftest format-detection
+  (are [delimiter]
+       (= delimiter
+          (-> data
+              (fmt/write-str delimiter)
+              fmt/detect-delimiter))
+    ::fmt/space
+    ::fmt/comma
+    ::fmt/pipe))
+
 (comment
   (defn partition-data [data]
     (->>
